@@ -1,4 +1,4 @@
-# CloudFlare uploader with custom posting
+# [cloudflare-stream-uploader](https://github.com/bostrot/cloudflare-stream-uploader)
 
 ## Disclaimer
 
