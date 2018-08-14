@@ -2,7 +2,7 @@
 
 ## Disclaimer
 
-Not finished. Do not use in production workflows without re-checking everything.
+Not finished. Do not use in production workflows without re-checking everything. Also you should include your own authentication model.
 
 ## Short description
 
