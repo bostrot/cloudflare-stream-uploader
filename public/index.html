@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>csuf by bostrot</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="stylesheet" type="text/css" href="image_uploader/css/style.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+  <script src="checksum.js"></script>
+  <script src="sha1.min.js"></script>
+  <script>
+    method = sha1;
+  </script>
+</head>
+
+<body>
+  <main class="container">
+    <div id="frame">
+
+      <h1>cloudflare stream uploader with flow.js example</h1>
+      <hr>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+      <script src="flow.js"></script>
+
+      <div class="flow-error">
+        Your browser, unfortunately, is not supported by Flow.js. The library requires support for
+        <a href="http://www.w3.org/TR/FileAPI/">the HTML5 File API</a> along with
+        <a href="http://www.w3.org/TR/FileAPI/#normalization-of-params">file slicing</a>.
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="drop">
+            <div class="flow-drop" ondragenter="jQuery(this).addClass('flow-dragover');" ondragend="jQuery(this).removeClass('flow-dragover');"
+              ondrop="jQuery(this).removeClass('flow-dragover');">
+              <div class="flow-drop-background">
+                <div class="flow-drop-icon">
+                  <img src="http://kristinmullertranscription.com/wp-content/uploads/2016/03/upload.png" alt="Steemit" style="width:150px">
+                </div>
+                <h3 class="flow-drop-text">
+                  <span>Drag and drop a video here to upload</span>
+                </h3>
+                <p>or</p>
+                <a class="btn btn-primary flow-browse" href="#" role="button">Browse files
+                </a>
+              </div>
+            </div>
+          </div>
+          <form>
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input class="form-control" id="title" placeholder="Sample Video">
+            </div>
+            <form>
+              <label for="thumbnail">Thumbnail Link</label>
+              <div class="input-group mb-2">
+                <input type="text" class="form-control" id="thumbnail" placeholder="https://example.com/thumbnail.png" aria-label="Thumbnail Link"
+                  aria-describedby="button-addon2">
+                <div class="input-group-append">
+                </div>
+              </div>
+
+              <div class="form-group" style="display: none;">
+                <label for="videohash">Video Hash</label>
+                <input class="form-control" id="videohash" placeholder="QmZ5NmGeStdit7tV6gdak1F8FyZhPsfA843YS9f2ywKH6w">
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="tags">Tags</label>
+                <input class="form-control" id="tags" placeholder="youtube, news, daily">
+              </div>
+              <a class="btn btn-primary" id="publish" href="#" role="button">Publish</a>
+            </form>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="flow-progress">
+      <table>
+        <tr>
+          <td width="100%">
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="0" id="upload-server"
+                aria-valuemin="0" aria-valuemax="100">
+              </div>
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="0" id="upload-node"
+                aria-valuemin="0" aria-valuemax="100">
+              </div>
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="0" id="upload-processing"
+                aria-valuemin="0" aria-valuemax="100">
+              </div>
+            </div>
+          </td>
+          <td class="progress-text" nowrap="nowrap"></td>
+          <td class="progress-pause" nowrap="nowrap">
+            <a href="#" onclick="r.upload(); return(false);" class="progress-resume-link">
+              <i class="fas fa-play"></i>
+            </a>
+            <a href="#" onclick="r.pause(); return(false);" class="progress-pause-link">
+              <i class="fas fa-pause"></i>
+            </a>
+            <a href="#" onclick="r.cancel(); return(false);" class="progress-cancel-link">
+              <i class="fas fa-stop"></i>
+            </a>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <ul class="flow-list"></ul>
+
+    <script>
+      var selectedFile;
+      var simplemde = new SimpleMDE({
+        autosave: {
+          enabled: true
+        },
+        element: document.getElementById("description")
+      });
+
+      function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+      }
+
+      (function () {
+        var user = getParameterByName("username");
+        var key = getParameterByName("access_token");
+        if (user != undefined && key != undefined) {
+          // some login logic maybe
+          document.getElementsByClassName("drop")[0].style.display = "block";
+          document.getElementsByClassName("drop")[1].style.display = "block";
+          document.getElementsByClassName("login")[0].style.display = "none";
+
+          $("#publish").click(function () {
+            var permlink = Math.random().toString(36).substring(5);
+            var title = $("#title").val();
+            var thumbnail = $("#thumbnail").val();
+            var videohash = $("#videohash").val(); // video url here
+            var description = simplemde.value();
+            var parent_permlink = "73cc4jyt";
+            var tags = [parent_permlink]
+            var maxTags = 4;
+            for (var i = 0; i < maxTags; i++) {
+              tags.push($("#tags").val().split(",")[i]);
+            }
+            // do something with the uploaded video and the meta data
+          });
+        }
+        var r = new Flow({
+          target: '/upload?username=' + user + '&token=' + key,
+          chunkSize: 50 * 1024 * 1024,
+          testChunks: false
+        });
+        // Flow.js isn't supported, fall back on a different method
+        if (!r.support) {
+          $('.flow-error').show();
+          return;
+        }
+        // Show a place for dropping/selecting files
+        $('.flow-drop').show();
+        r.assignDrop($('.flow-drop')[0], false, false, {
+          accept: 'video/*'
+        });
+        r.assignBrowse($('.flow-browse')[0], false, false, {
+          accept: 'video/*'
+        });
+
+        // Handle file add event
+        function fileAdded(file) {
+          selectedFile = file;
+          document.getElementsByTagName("form")[0].style.display = "block";
+          // Show progress bar
+          $('.flow-progress, .flow-list').show();
+          $('.drop').hide();
+          // Add the file to the list
+          $('.flow-list').append(
+            '<li class="flow-file flow-file-' + file.uniqueIdentifier + '">' +
+            'Uploading <span class="flow-file-name"></span><br /> ' +
+            '<span class="flow-file-size"></span> ' +
+            '<span class="flow-file-progress"></span> ' +
+            '<a href="" class="flow-file-download" target="_blank">' +
+            'Cloudflare Link' +
+            '</a> '
+          );
+          var $self = $('.flow-file-' + file.uniqueIdentifier);
+          $self.find('.flow-file-name').text(file.name);
+          $self.find('.flow-file-size').text(readablizeBytes(file.size));
+          $self.find('.flow-file-download').attr('href', '/download/' + file.uniqueIdentifier).hide();
+          $self.find('.flow-file-pause').on('click', function () {
+            file.pause();
+            $self.find('.flow-file-pause').hide();
+            $self.find('.flow-file-resume').show();
+          });
+          $self.find('.flow-file-resume').on('click', function () {
+            file.resume();
+            $self.find('.flow-file-pause').show();
+            $self.find('.flow-file-resume').hide();
+          });
+          $self.find('.flow-file-cancel').on('click', function () {
+            file.cancel();
+            $self.remove();
+          });
+        }
+        r.on('fileAdded', function (file) {
+          console.log(file)
+          execute(file);
+          document.getElementsByTagName("form")[0].style.display = "block";
+          // Show progress bar
+          $('.flow-progress, .flow-list').show();
+          $('.drop').hide();
+          // Add the file to the list
+          $('.flow-list').append(
+            '<li class="flow-file flow-file-' + file.uniqueIdentifier + '">' +
+            'Uploading <span class="flow-file-name"></span><br /> ' +
+            '<span class="flow-file-size"></span> ' +
+            '<span class="flow-file-progress"></span> ' +
+            '<a href="" class="flow-file-download" target="_blank">' +
+            'Cloudflare Link' +
+            '</a> '
+          );
+          var $self = $('.flow-file-' + file.uniqueIdentifier);
+          $self.find('.flow-file-name').text(file.name);
+          $self.find('.flow-file-size').text(readablizeBytes(file.size));
+          $self.find('.flow-file-download').attr('href', '/download/' + file.uniqueIdentifier).hide();
+          $self.find('.flow-file-pause').on('click', function () {
+            file.pause();
+            $self.find('.flow-file-pause').hide();
+            $self.find('.flow-file-resume').show();
+          });
+          $self.find('.flow-file-resume').on('click', function () {
+            file.resume();
+            $self.find('.flow-file-pause').show();
+            $self.find('.flow-file-resume').hide();
+          });
+          $self.find('.flow-file-cancel').on('click', function () {
+            file.cancel();
+            $self.remove();
+          });
+        });
+        r.on('filesSubmitted', function (file) {
+          r.upload();
+        });
+        r.on('complete', function () {
+          // Hide pause/resume when the upload has completed
+          $('.flow-progress .progress-resume-link, .flow-progress .progress-pause-link').hide();
+        });
+        r.on('fileSuccess', function (file, message) {
+          var $self = $('.flow-file-' + file.uniqueIdentifier);
+          // Reflect that the file upload has completed
+          $self.find('.flow-file-pause, .flow-file-resume').remove();
+          console.log("te");
+          $self.find('.flow-file-progress').text('(processing)');
+          var seconds = 1,
+            interval = seconds * 1000;
+          var updateInterval;
+
+          function updateStatus() {
+            fetch('/status/' + file.uniqueIdentifier)
+              .then(function (response) {
+                return response.json();
+              })
+              .then(function (result) {
+                console.log(result);
+                if (result["status"] != undefined) {
+                  $('#upload-node').css({
+                    width: Math.floor(result["status"]) + '%'
+                  });
+                  $('#upload-node').html(Math.floor(result["status"]) + '%');
+                  if (result["status"] == "100.00") {
+                    $self.find('.flow-file-download').attr('href', result["url"]).show();
+                    console.log(result["processing"]["state"]);
+                    switch (result["processing"]["state"]) {
+                      case "ready":
+                        console.log(result["ready"]);
+                        if (result["ready"]) {
+                          $('#upload-processing').css({
+                            width: "100%"
+                          });
+                          $('#upload-processing').html(
+                            '100%');
+                          document.getElementById("upload-processing").classList.remove("progress-bar-animated");
+                          clearInterval(updateInterval);
+                          // Uploaded and processed successfully
+                          $('.flow-file-progress').text('(completed)');
+                          $('#publish').show();
+                          // Set hashes
+                          $("#videohash").val(result["url"]);
+                          // show publish button
+                        }
+                        break;
+                      case "queued":
+                        $self.find('.flow-file-progress').text('(queued)');
+                        break;
+                      case "inprogress":
+                        if (result["processing"]["step"] != "manifest") {
+                          $self.find('.flow-file-progress').text('(' + result["processing"]["step"] + ')');
+                        } else {
+                          $self.find('.flow-file-progress').text('(ready)');
+                        }
+                        $('#upload-processing').html(parseInt(result["processing"]["pctComplete"].split(".")[0]) +
+                          '%');
+                        $('#upload-processing').css({
+                          width: parseInt(result["processing"]["pctComplete"].split(".")[0]) + '%'
+                        });
+                        break;
+                      default:
+                        break;
+                    }
+                  }
+                }
+                if (result["ready"]) {
+                  //console.log("READY");
+                  //$self.find('.flow-file-progress').text('(completed)');
+                  //clearInterval(updateStatus);
+                }
+              });
+          }
+          updateInterval = setInterval(updateStatus, interval);
+        });
+        r.on('fileError', function (file, message) {
+          // Reflect that the file upload has resulted in error
+          $('.flow-file-' + file.uniqueIdentifier + ' .flow-file-progress').html('(file could not be uploaded: ' +
+            message + ')');
+        });
+        r.on('fileProgress', function (file) {
+          // Handle progress for both the file and the overall upload
+          $('.flow-file-' + file.uniqueIdentifier + ' .flow-file-progress')
+            .html(Math.floor(file.progress() * 100) + '% ' +
+              readablizeBytes(file.averageSpeed) + '/s ' +
+              secondsToStr(file.timeRemaining()) + ' remaining');
+          $('#upload-server').css({
+            width: Math.floor(r.progress() * 100) + '%'
+          });
+          $('#upload-server').html(Math.floor(r.progress() * 100) + '%');
+        });
+        r.on('uploadStart', function () {
+          // Show pause, hide resume
+          $('.flow-progress .progress-resume-link').hide();
+          $('.flow-progress .progress-pause-link').show();
+        });
+        r.on('catchAll', function () {
+          console.log.apply(console, arguments);
+        });
+        window.r = {
+          pause: function () {
+            r.pause();
+            // Show resume, hide pause
+            $('.flow-file-resume').show();
+            $('.flow-file-pause').hide();
+            $('.flow-progress .progress-resume-link').show();
+            $('.flow-progress .progress-pause-link').hide();
+          },
+          cancel: function () {
+            r.cancel();
+            $('.flow-file').remove();
+          },
+          upload: function () {
+            $('.flow-file-pause').show();
+            $('.flow-file-resume').hide();
+            r.resume();
+          },
+          flow: r
+        };
+      })();
+
+      function readablizeBytes(bytes) {
+        var s = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'];
+        var e = Math.floor(Math.log(bytes) / Math.log(1024));
+        return (bytes / Math.pow(1024, e)).toFixed(2) + " " + s[e];
+      }
+
+      function secondsToStr(temp) {
+        function numberEnding(number) {
+          return (number > 1) ? 's' : '';
+        }
+        var years = Math.floor(temp / 31536000);
+        if (years) {
+          return years + ' year' + numberEnding(years);
+        }
+        var days = Math.floor((temp %= 31536000) / 86400);
+        if (days) {
+          return days + ' day' + numberEnding(days);
+        }
+        var hours = Math.floor((temp %= 86400) / 3600);
+        if (hours) {
+          return hours + ' hour' + numberEnding(hours);
+        }
+        var minutes = Math.floor((temp %= 3600) / 60);
+        if (minutes) {
+          return minutes + ' minute' + numberEnding(minutes);
+        }
+        var seconds = temp % 60;
+        return seconds + ' second' + numberEnding(seconds);
+      }
+
+      function outputUpdate(vol) {
+        document.querySelector('#weight').value = vol;
+      }
+    </script>
+
+    </div>
+</body>
+<script type="text/javascript" src="image_uploader/js/imgur.js"></script>
+<script type="text/javascript" src="image_uploader/js/upload.js"></script>
+
+</html>

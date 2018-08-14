@@ -1,0 +1,397 @@
+/* Reset */
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+fieldset,
+img {
+    border: 0;
+}
+
+address,
+caption,
+cite,
+code,
+dfn,
+th,
+var {
+    font-style: normal;
+    font-weight: normal;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+caption,
+th {
+    text-align: left;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+q:before,
+q:after {
+    content: '';
+}
+
+abbr,
+acronym {
+    border: 0;
+}
+
+/* Baseline */
+
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font: normal 12px/1.3em Helvetica, Arial, sans-serif;
+    color: #333;
+}
+
+h1 {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 19px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+h5 {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+p {
+    margin: 10px 0;
+}
+
+body {
+    margin: 40px;
+}
+
+form {
+    margin-top: 20px;
+}
+
+/* Uploader: Drag & Drop */
+
+.flow-error {
+    display: none;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.drop {
+    margin-top: 1em;
+}
+
+form {
+    display: none;
+}
+
+.login {
+    margin: 0 auto;
+}
+
+#publish {
+    display: block;
+}
+
+.flow-drop {
+    width: 100%;
+    padding: 56px 0;
+    font-size: 13px;
+    text-align: center;
+    color: #666;
+    display: block;
+    font-weight: bold;
+    background-color: #fff;
+    border: 2px dashed #c2cdda;
+    border-radius: 6px;
+    z-index: 9999;
+    margin: 0 auto;
+    line-height: normal;
+}
+
+.progress:before {
+    content: attr(data-label);
+    font-size: 0.8em;
+    position: absolute;
+    text-align: center;
+    top: 5px;
+    left: 0;
+    right: 0;
+}
+
+.progress .value {
+    background-color: #7cc4ff;
+    display: inline-block;
+    height: 100%;
+}
+
+.progress {
+    height: 1.5em;
+    width: 100%;
+    background-color: #c9c9c9;
+    position: relative;
+}
+
+.flow-drop p {
+    margin: 0;
+    margin-bottom: 0px;
+    padding: 0;
+    color: #90a0bc;
+    margin-bottom: 12px;
+}
+
+.flow-drop-icon {
+    color: #789bec;
+    font-size: 56px;
+    margin-bottom: 26px;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.flow-drop-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #5B5B7B;
+    white-space: normal;
+    margin-bottom: 8px;
+}
+
+.progress-cancel-link {
+    color: red;
+}
+
+.progress-pause-link {
+    color: grey;
+}
+
+.progress-resume-link {
+    color: green;
+}
+
+.flow-drop-input {
+    padding: 12px 18px;
+    background: linear-gradient(135deg, #3a8ffe 0, #9658fe 100%);
+    background-position-x: 0%;
+    background-position-y: 0%;
+    background-size: auto auto;
+    background-size: 140% auto;
+    background-position: center;
+    color: #fff;
+    display: inline-block;
+    margin: 2em 0;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 6px;
+    outline: 0;
+    font-weight: 700;
+    cursor: pointer;
+    vertical-align: middle;
+    text-decoration: none;
+}
+
+
+.flow-dragover {
+    padding: 30px;
+    color: #555;
+    background-color: #ddd;
+    border: 1px solid #999;
+}
+
+/* Uploader: Progress bar */
+
+.flow-progress {
+    margin: 0 auto;
+    padding-top: 1em;
+    width: 100%;
+    display: none;
+}
+
+.progress-container {
+    height: 7px;
+    background: #9CBD94;
+    position: relative;
+}
+
+.progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background: #45913A;
+    width: 0;
+}
+
+.progress-text {
+    font-size: 11px;
+    line-height: 9px;
+    padding-left: 10px;
+}
+
+.progress-pause {
+    padding: 0 0 0 7px;
+}
+
+.progress-resume-link {
+    display: none;
+}
+
+.is-paused .progress-resume-link {
+    display: inline;
+}
+
+.is-paused .progress-pause-link {
+    display: none;
+}
+
+.is-complete .progress-pause {
+    display: none;
+}
+
+/* Uploader: List of items being uploaded */
+
+.flow-list {
+    overflow: auto;
+    margin-right: -20px;
+    display: none;
+}
+
+.flow-file {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.uploader-item {
+    width: 148px;
+    height: 90px;
+    background-color: #666;
+    position: relative;
+    border: 2px solid black;
+    float: left;
+    margin: 0 6px 6px 0;
+}
+
+.uploader-item-thumbnail {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.uploader-item img.uploader-item-thumbnail {
+    opacity: 0;
+}
+
+.uploader-item-creating-thumbnail {
+    padding: 0 5px;
+    font-size: 9px;
+    color: white;
+}
+
+.uploader-item-title {
+    position: absolute;
+    font-size: 9px;
+    line-height: 11px;
+    padding: 3px 50px 3px 5px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    min-height: 27px;
+}
+
+.uploader-item-status {
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+}
+
+/* Uploader: Hover & Active status */
+
+.uploader-item:hover,
+.is-active .uploader-item {
+    border-color: #4a873c;
+    cursor: pointer;
+}
+
+.uploader-item:hover .uploader-item-title,
+.is-active .uploader-item .uploader-item-title {
+    background-color: rgba(74, 135, 60, 0.8);
+}
+
+/* Uploader: Error status */
+
+.is-error .uploader-item:hover,
+.is-active.is-error .uploader-item {
+    border-color: #900;
+}
+
+.is-error .uploader-item:hover .uploader-item-title,
+.is-active.is-error .uploader-item .uploader-item-title {
+    background-color: rgba(153, 0, 0, 0.6);
+}
+
+.is-error .uploader-item-creating-thumbnail {
+    display: none;
+}
