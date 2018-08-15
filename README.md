@@ -28,9 +28,13 @@ cd cloudflare-stream-uploader
 node index.js
 ```
 
+
 ![thumbnail](https://i.imgur.com/0H8MKUw.png)
 
+
 ## Help
+
+Join the forum if you need help: [discuss.bostrot.com](https://discuss.bostrot.com)
 
 You are welcome to contribute with pull requests, bug reports, ideas and donations.
 
