@@ -34,12 +34,10 @@ node index.js
 
 ## Help
 
-Join the forum if you need help: [discuss.bostrot.com](https://discuss.bostrot.com)
-
-You are welcome to contribute with pull requests, bug reports, ideas and donations.
+You are welcome to contribute with pull requests, bug reports, ideas and donations. Join the forum if you have any general purpose questions: [bostrot.com](https://www.bostrot.com)
 
 Bitcoin: [1ECPWeTCq93F68BmgYjUgGSV11XuzSPSeM](https://www.blockchain.com/btc/payment_request?address=1ECPWeTCq93F68BmgYjUgGSV11XuzSPSeM&currency=USD&nosavecurrency=true&message=Bostrot)
 
 PayPal: [paypal.me/bostrot](https://paypal.me/bostrot)
 
-Hosting: [2.50$ VPS at VULTR](https://www.vultr.com/?ref=7505919)
+Hosting: [Get $50 free VPS credit on Vultr](https://www.bostrot.com/?ref=hosting)
